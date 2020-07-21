@@ -26,6 +26,6 @@ orderStatusSchema.plugin(toJSON);
 /**
  * @typedef OrderStatus
  */
-const OrderStatus = mongoose.model('orderStatus', orderStatusSchema);
+const OrderStatus = mongoose.model('OrderStatus', orderStatusSchema);
 
 export default OrderStatus;

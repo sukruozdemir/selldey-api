@@ -39,6 +39,6 @@ tokenSchema.plugin(toJSON);
 /**
  * @typedef Token
  */
-const Token = mongoose.model('token', tokenSchema);
+const Token = mongoose.model('Token', tokenSchema);
 
 export default Token;

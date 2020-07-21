@@ -4,9 +4,9 @@ import { toJSON } from './plugins';
 const orderSchema = mongoose.Schema(
   {
     status: {
-      type: String,
+      type: mongoose.SchemaTypes.ObjectId,
       required: true,
-      index: true,
+      ref: 'OrderStatus',
     },
   },
   {
@@ -21,6 +21,6 @@ orderSchema.plugin(toJSON);
 /**
  * @typedef Order
  */
-const Order = mongoose.model('order', orderSchema);
+const Order = mongoose.model('Order', orderSchema);
 
 export default Order;

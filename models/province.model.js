@@ -8,9 +8,9 @@ const provinceSchema = Schema(
       trim: true,
     },
     city: {
-      type: SchemaTypes.ObjectId,
+      type: mongoose.SchemaTypes.ObjectId,
       required: true,
-      ref: 'city',
+      ref: 'City',
     },
   },
   {
@@ -29,6 +29,6 @@ provinceSchema.statics.findByCity = async function (city) {
   return provinces;
 };
 
-const Province = mongoose.model('province', provinceSchema);
+const Province = mongoose.model('Province', provinceSchema);
 
 export default Province;

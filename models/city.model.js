@@ -21,6 +21,6 @@ citySchema.plugin(toJSON);
 /**
  * @typedef City
  */
-const City = mongoose.model('city', citySchema);
+const City = mongoose.model('City', citySchema);
 
 export default City;
