@@ -1,4 +1,4 @@
-import joi from 'joi';
+import Joi from 'joi';
 import httpStatus from 'http-status';
 
 import { pick } from './../utils/pick';
