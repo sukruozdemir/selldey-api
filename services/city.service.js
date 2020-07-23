@@ -42,7 +42,7 @@ export const createCity = async (title, no) => {
  * @param {Number}   no
  * @returns {Promise<City>}
  */
-export const updatecityById = async (cityId, title, no) => {
+export const updateCityById = async (cityId, title, no) => {
   const city = await getcityById(cityId);
 
   if (!city) {
@@ -67,7 +67,7 @@ export const updatecityById = async (cityId, title, no) => {
  * @param {ObjectId} cityId
  * @returns {Promise<City>}
  */
-export const deletecityById = async (cityId) => {
+export const deleteCityById = async (cityId) => {
   const city = await getcityById(cityId);
 
   if (!city) {
@@ -84,6 +84,6 @@ export const deletecityById = async (cityId) => {
  * @param {ObjectId} cityId
  * @returns {Promise<City>}
  */
-export const getcityById = async (cityId) => {
+export const getCityById = async (cityId) => {
   return await City.findById(cityId);
 };
