@@ -1,6 +1,6 @@
 import * as Auth from './auth.service';
 import * as Category from './category.service';
-import * as City from './city.service.service';
+import * as City from './city.service';
 import * as OrderStatus from './order-status.service';
 import * as Product from './product.service';
 import * as Province from './province.service';
