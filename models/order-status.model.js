@@ -1,17 +1,22 @@
 import mongoose from 'mongoose';
-import { toJSON } from './plugins';
+import { toJSON, paginate } from './plugins';
 
 const orderStatusSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     color: {
       type: String,
       required: true,
       trim: true,
+    },
+    active: {
+      type: Boolean,
+      default: true,
     },
   },
   {
@@ -22,6 +27,18 @@ const orderStatusSchema = new mongoose.Schema(
 
 // add plugin that converts mongoose to json
 orderStatusSchema.plugin(toJSON);
+orderStatusSchema.plugin(paginate);
+
+/**
+ * Check if order status title is duplicate
+ *
+ * @param {string} title - The orderstatus's title
+ * @returns {Promise<boolean>}
+ */
+orderStatusSchema.statics.isDuplicate = async function (title) {
+  const orderStatus = await this.findOne({ title });
+  return !!orderStatus;
+};
 
 /**
  * @typedef OrderStatus

@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
+import { toJSON, paginate } from './plugins';
 
 const provinceSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       trim: true,
@@ -19,14 +20,20 @@ const provinceSchema = new mongoose.Schema(
   },
 );
 
+// add plugin that converts mongoose to json
+provinceSchema.plugin(toJSON);
+provinceSchema.plugin(paginate);
+
 /**
- * Get Provinces By City
- * @param {object} city
- * @returns {Promise<Array<Province>>}
+ * Check if province title & city is duplicate
+ *
+ * @param {string}   title - The province's title
+ * @param {ObjectId} city  - The city's id
+ * @returns {Promise<boolean>}
  */
-provinceSchema.statics.findByCity = async function (city) {
-  const provinces = await this.find({ city }).sort('name').lean();
-  return provinces;
+provinceSchema.statics.isDuplicate = async function (title, city) {
+  const province = await this.findOne({ title, city });
+  return !!province;
 };
 
 const Province = mongoose.model('Province', provinceSchema);
