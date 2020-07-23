@@ -12,7 +12,7 @@ export const createProduct = catchAsync(async (req, res) => {
 export const getProducts = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['title', 'site', 'active', 'category']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await productService.queryCategories(filter, options);
+  const result = await productService.queryProducts(filter, options);
   res.status(httpStatus.OK).send(result);
 });
 

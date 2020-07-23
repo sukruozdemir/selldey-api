@@ -105,7 +105,7 @@ export const removeProductPriceById = async (productId, priceId) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Ürün bulunamadı');
   }
 
-  product.prices.remove({ id: priceId });
+  product.prices.remove({ _id: priceId });
   await product.save();
   return product;
 };

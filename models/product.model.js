@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema(
     },
     prices: [
       {
-        id: {
+        _id: {
           type: String,
           default: shortid.generate,
           unique: true,
