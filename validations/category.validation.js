@@ -11,7 +11,7 @@ export const createCategory = {
 export const getCategories = {
   query: Joi.object().keys({
     title: Joi.string(),
-    boolean: Joi.boolean(),
+    active: Joi.boolean(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
