@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const provinceSchema = Schema(
+const provinceSchema = new mongoose.Schema(
   {
     name: {
       type: String,

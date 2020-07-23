@@ -1,8 +1,51 @@
 import mongoose from 'mongoose';
 import { toJSON } from './plugins';
 
-const orderSchema = mongoose.Schema(
+import PaymentTypes from './../enumerations/payment-type';
+
+const orderSchema = new mongoose.Schema(
   {
+    customerName: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: Number,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+    address: {
+      type: String,
+    },
+    paymentType: {
+      type: String,
+      enum: Object.values(PaymentTypes),
+    },
+    orderNote: {
+      type: String,
+    },
+    ordered: {
+      type: Date,
+      default: new Date(),
+    },
+    city: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true,
+      ref: 'City',
+    },
+    province: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true,
+      ref: 'Province',
+    },
+    product: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true,
+      ref: 'Product',
+    },
     status: {
       type: mongoose.SchemaTypes.ObjectId,
       required: true,

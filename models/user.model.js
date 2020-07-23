@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 
 import { paginate, toJSON } from './plugins';
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,

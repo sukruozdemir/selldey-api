@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { toJSON } from './plugins';
 
-const orderStatusSchema = mongoose.Schema(
+const orderStatusSchema = new mongoose.Schema(
   {
     name: {
       type: String,
