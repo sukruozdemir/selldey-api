@@ -1,6 +1,3 @@
-require("babel-core/register");
-require("babel-polyfill");
-
 import mongoose from 'mongoose';
 
 import app from './app';
