@@ -18,7 +18,6 @@ const productSchema = new mongoose.Schema(
         _id: {
           type: String,
           default: shortid.generate,
-          unique: true,
         },
         quantity: {
           type: Number,
@@ -40,7 +39,6 @@ const productSchema = new mongoose.Schema(
     },
     category: {
       type: mongoose.SchemaTypes.ObjectId,
-      required: true,
       ref: 'Category',
     },
     active: {

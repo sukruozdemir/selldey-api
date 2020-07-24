@@ -6,7 +6,7 @@ export const createProduct = {
     title: Joi.string().required().trim(),
     description: Joi.string(),
     site: Joi.string().required().uri(),
-    category: Joi.string().required().custom(objectId),
+    category: Joi.string().custom(objectId),
     active: Joi.boolean().default(true),
   }),
 };
