@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --exec babel-node index.js",
-    "dev": "nodemon --exec babel-node index.js"
+    "clean": "rimraf build && mkdir build",
+    "build-server": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-server",
+    "start": "node ./build/index.js",
+    "dev": "nodemon --exec babel-node src/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
