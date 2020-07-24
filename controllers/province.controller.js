@@ -11,8 +11,11 @@ export const createProvince = catchAsync(async (req, res) => {
 
 export const getProvinces = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['title', 'city']);
+  const filter2 = pick(req.params, ['city']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await provinceService.queryProvices(filter, options);
+
+  const filters = Object.assign(filter, filter2);
+  const result = await provinceService.queryProvices(filters, options);
   res.status(httpStatus.OK).send(result);
 });
 
