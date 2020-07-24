@@ -1,5 +1,8 @@
 import httpStatus from 'http-status';
+import fs from 'fs';
+import path from 'path';
 
+import config from '../config/config';
 import { Product } from '../models';
 import { ApiError } from '../utils/api-error';
 
@@ -118,4 +121,24 @@ export const removeProductPriceById = async (productId, priceId) => {
  */
 export const getProductById = async (productId) => {
   return Product.findById(productId);
+};
+
+/**
+ * Upload product cover image
+ *
+ * @param {ObjectId} productId
+ * @param {Buffer}   file
+ * @returns {Promise<Product>}
+ */
+export const uploadCoverImage = async (productId, file) => {
+  const product = await getProductById(productId);
+  if (!product) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Ürün bulunamadı');
+  }
+
+  product.coverImage.data = fs.readFileSync(path.join(__dirname + '/../uploads/' + file.originalname));
+  product.coverImage.contentType = 'image/jpg';
+
+  await product.save();
+  return product;
 };

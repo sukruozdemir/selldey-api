@@ -68,3 +68,9 @@ export const removePrice = {
     priceId: Joi.string(),
   }),
 };
+
+export const uploadCoverImage = {
+  params: Joi.object().keys({
+    productId: Joi.string().custom(objectId),
+  }),
+};

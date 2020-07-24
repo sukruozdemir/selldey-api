@@ -43,3 +43,8 @@ export const removePrice = catchAsync(async (req, res) => {
   const product = await productService.removeProductPriceById(req.params.productId, req.body.priceId);
   res.status(httpStatus.OK).send(product);
 });
+
+export const uploadCoverImage = catchAsync(async (req, res) => {
+  const product = await productService.uploadCoverImage(req.params.productId, req.file);
+  res.status(httpStatus.OK).send(product);
+});

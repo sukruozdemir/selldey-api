@@ -13,6 +13,7 @@ const envVarsSchema = joi
     JWT_SECRET: joi.string().required().description('JWT secret key'),
     JWT_ACCESS_EXPIRATION_MINUTES: joi.number().default(30).description('minutes after which access tokens expire'),
     JWT_REFRESH_EXPIRATION_DAYS: joi.number().default(30).description('days after which refresh tokens expire'),
+    UPLOAD_PATH: joi.string().required().description('Upload Path'),
   })
   .unknown();
 
@@ -25,6 +26,7 @@ if (error) {
 export default {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
+  uploadPath: envVars.UPLOAD_PATH,
   mongoose: {
     url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
     options: {
