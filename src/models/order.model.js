@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { toJSON } from './plugins';
+import { toJSON, paginate } from './plugins';
 
 import PaymentTypes from './../enumerations/payment-type';
 
@@ -10,7 +10,9 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
+      maxlength: 13,
+      required: true,
     },
     quantity: {
       type: Number,
@@ -60,6 +62,7 @@ const orderSchema = new mongoose.Schema(
 
 // add plugin that converts mongoose to json
 orderSchema.plugin(toJSON);
+orderSchema.plugin(paginate);
 
 /**
  * @typedef Order

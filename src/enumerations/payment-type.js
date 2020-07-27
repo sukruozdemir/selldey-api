@@ -1,6 +1,6 @@
 const PaymentType = Object.freeze({
-  KREDI_KARTI: 'KREDI_KARTI',
-  KAPIDA_ODEME: 'KAPIDA_ODEME',
+  KAPIDA_KREDI_KARTI: 'KAPIDA_KREDI_KARTI',
+  KAPIDA_NAKIT_ODEME: 'KAPIDA_NAKIT_ODEME',
 });
 
 export default PaymentType;

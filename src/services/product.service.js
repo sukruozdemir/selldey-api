@@ -52,11 +52,11 @@ export const updateProductById = async (productId, updateBody) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Ürün bulunamadı');
   }
 
-  if (updateBody.title && (await Product.isTitleDuplicate(updateBody.title))) {
-    throw new ApiError(httpStatus.BAD_REQUEST, `"${productBody.title}" ürünü daha önce eklenmiş`);
+/*   if (updateBody.title && (await Product.isTitleDuplicate(updateBody.title))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, `"${updateBody.title}" ürünü daha önce eklenmiş`);
   } else if (updateBody.site && (await Product.isSiteDuplicate(updateBody.site))) {
-    throw new ApiError(httpStatus.BAD_REQUEST, `"${productBody.site}" sitesi başka ürüne daha önce eklenmiş`);
-  }
+    throw new ApiError(httpStatus.BAD_REQUEST, `"${updateBody.site}" sitesi başka ürüne daha önce eklenmiş`);
+  } */
 
   Object.assign(product, updateBody);
 

@@ -28,6 +28,16 @@ const paginate = (schema) => {
     const page = options.page && parseInt(options.page, 10) > 0 ? parseInt(options.page, 10) : 1;
     const skip = (page - 1) * limit;
 
+    if (filter) {
+      for (const [key, value] of Object.entries(filter)) {
+        if (value.startsWith('%') && value.endsWith('%')) {
+          delete filter[key];
+          const clearedValue = value.substring(1, value.length - 1);
+          filter[key] = { $regex: clearedValue, $options: 'i' };
+        }
+      }
+    }
+
     const countPromise = this.countDocuments(filter).exec();
     const docsPromise = this.find(filter).sort(sort).skip(skip).limit(limit).exec();
 
