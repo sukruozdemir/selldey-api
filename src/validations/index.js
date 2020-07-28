@@ -5,5 +5,6 @@ import * as Order from './order.validation';
 import * as OrderStatus from './order-status.validation';
 import * as Product from './product.validation';
 import * as Province from './province.validation';
+import * as User from "./user.validation";
 
-export { Auth, Category, City, Order, OrderStatus, Product, Province };
+export { Auth, Category, City, Order, OrderStatus, Product, Province, User };

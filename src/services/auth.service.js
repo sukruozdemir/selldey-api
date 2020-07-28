@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import moment from 'moment';
 import httpStatus from 'http-status';
 
+import * as userService from './user.service';
+
 import config from './../config/config';
 import { ApiError } from './../utils/api-error';
 import { Token } from './../models';

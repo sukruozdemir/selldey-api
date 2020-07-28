@@ -5,5 +5,6 @@ import * as Order from './order.controller';
 import * as OrderStatus from './order-status.controller';
 import * as Product from './product.controller';
 import * as Province from './province.controller';
+import * as User from "./user.controller";
 
-export { Auth, Category, City, Order, OrderStatus, Product, Province };
+export { Auth, Category, City, Order, OrderStatus, Product, Province, User };

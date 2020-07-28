@@ -3,6 +3,7 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 
 import { paginate, toJSON } from './plugins';
+import UserRole from '../enumerations/user-role';
 
 const userSchema = new mongoose.Schema(
   {
@@ -40,6 +41,11 @@ const userSchema = new mongoose.Schema(
       },
       private: true, // used by the toJSON plugin
     },
+    role: {
+      type: String,
+      enum: Object.values(UserRole),
+      default: UserRole.USER,
+    },
   },
   {
     timestamps: true,
@@ -71,6 +77,16 @@ userSchema.methods.isPasswordMatch = async function (password) {
   const user = this;
   return bcrypt.compare(password, user.password);
 };
+
+userSchema
+  .virtual('fullName')
+  .get(function () {
+    return `${this.firstName} ${this.lastName}`;
+  })
+  .set(function (v) {
+    this.firstName = v.substr(0, v.indexOf(' '));
+    this.lastName = v.substr(v.indexOf(' ') + 1);
+  });
 
 userSchema.pre('save', async function (next) {
   const user = this;
