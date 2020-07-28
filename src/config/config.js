@@ -11,8 +11,8 @@ const envVarsSchema = joi
     PORT: joi.number().default(5001),
     MONGODB_URL: joi.string().required().description('Mongo DB URL'),
     JWT_SECRET: joi.string().required().description('JWT secret key'),
-    JWT_ACCESS_EXPIRATION_MINUTES: joi.number().default(30).description('minutes after which access tokens expire'),
-    JWT_REFRESH_EXPIRATION_DAYS: joi.number().default(30).description('days after which refresh tokens expire'),
+    JWT_ACCESS_EXPIRATION_HOURS: joi.string().default("1h").description('hours after which access tokens expire'),
+    JWT_REFRESH_EXPIRATION_DAYS: joi.string().default("30d").description('days after which refresh tokens expire'),
     UPLOAD_PATH: joi.string().required().description('Upload Path'),
   })
   .unknown();
@@ -38,7 +38,7 @@ export default {
   },
   jwt: {
     secret: envVars.JWT_SECRET,
-    accessExpirationMinutes: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
+    accessExpirationHours: envVars.JWT_ACCESS_EXPIRATION_HOURS,
     refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS,
     resetPasswordExpirationMinutes: 10,
   },
