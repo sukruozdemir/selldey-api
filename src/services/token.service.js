@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 import httpStatus from 'http-status';
 
@@ -13,13 +14,17 @@ import { ApiError } from './../utils/api-error';
  * @param {string} [secret]
  * @returns {string}
  */
-export const generateToken = (userId, expires, secret = config.jwt.secret) => {
+export const generateToken = (user, expires, secret = config.jwt.secret) => {
   const payload = {
-    sub: userId,
-    iat: moment().unix(),
-    exp: expires.unix(),
+    sub: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    role: user.role,
+    iss: 'api.selldey.com',
+    aud: 'api.selldey.com',
   };
-  return jwt.sign(payload, secret);
+  return jwt.sign(payload, secret, { algorithm: 'HS256', expiresIn: expires });
 };
 
 /**
@@ -63,22 +68,11 @@ export const verifyToken = async (token, type) => {
  * @returns {Promise<Object>}
  */
 export const generateAuthTokens = async (user) => {
-  const accessTokenExpires = moment().add(config.jwt.accessExpirationMinutes, 'minutes');
-  const accessToken = generateToken(user.id, accessTokenExpires);
-
-  const refreshTokenExpires = moment().add(config.jwt.refreshExpirationDays, 'days');
-  const refreshToken = generateToken(user.id, refreshTokenExpires);
-  await saveToken(refreshToken, user.id, refreshTokenExpires, 'refresh');
+  const accessToken = generateToken(user, config.jwt.accessExpirationHours);
 
   return {
-    access: {
-      token: accessToken,
-      expires: accessTokenExpires.toDate(),
-    },
-    refresh: {
-      token: refreshToken,
-      expires: refreshTokenExpires.toDate(),
-    },
+    token: accessToken,
+    expires: jwtDecode(accessToken).exp,
   };
 };
 
